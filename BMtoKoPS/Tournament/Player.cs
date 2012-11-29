@@ -2,19 +2,35 @@
 using BMtoKOPS.KOPS;
 
 namespace BMtoKOPS {
-    public class Player {
-        public String n;
-        public double w;
-        public String l;
+  /// <summary>
+  /// Parse 26 chair record from LUC file and provide player's info
+  /// </summary>
+  public class Player {
+    /// <summary>
+    /// Players first letter of first name and surname
+    /// </summary>
+    public String name;
+    /// <summary>
+    /// Players rating
+    /// </summary>
+    public double wk;
+    /// <summary>
+    /// Players location
+    /// </summary>
+    public String location;
 
-        public Player(String name) {
-            n = name.Substring(0, 17).Trim();
-            if (!name.Substring(17, 4).Trim().Equals(String.Empty)) {
-                w = KopsHelper.GetDoubleFromString(name.Substring(17, 4).Trim());
-            } else {
-                w = 0;
-            }
-            l = name.Substring(21, 5).Trim();
-        }
+    public Player(String name) {
+      this.name = name.Substring(0, 17).Trim();
+      if (!name.Substring(17, 4).Trim().Equals(String.Empty)) {
+        this.wk = KopsHelper.GetDoubleFromString(name.Substring(17, 4).Trim());
+      } else {
+        this.wk = 0;
+      }
+      this.location = name.Substring(21, 5).Trim();
     }
+
+    public bool isEmpty() {
+      return name.Equals(String.Empty);
+    }
+  }
 }
