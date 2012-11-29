@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
+using BMtoKOPS.KOPS;
 
 namespace BMtoKOPS
 {

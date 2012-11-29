@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.KOPS {
     public class KopsDeal : Deal {
         private String k;
         private String d;

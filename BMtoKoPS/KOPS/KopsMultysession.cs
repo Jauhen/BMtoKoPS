@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using BMtoKOPS.KOPS;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.KOPS {
     public class KopsMultysession : ITournament {
         private string path;
         private List<KopsTournament> tournaments;

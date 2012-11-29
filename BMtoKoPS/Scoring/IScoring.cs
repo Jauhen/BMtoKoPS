@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.Scoring {
     public interface IScoring {
         void SetMax(int max);
         String PrintResult(double res);

@@ -2,8 +2,9 @@
 using System.IO;
 using System.Data;
 using System;
+using BMtoKOPS.Scoring;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.KOPS {
     public class KopsTournament : Tournament {
         private int pairsNumber;
         public int scoring;

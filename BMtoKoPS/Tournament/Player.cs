@@ -1,4 +1,5 @@
 ﻿using System;
+using BMtoKOPS.KOPS;
 
 namespace BMtoKOPS {
     public class Player {

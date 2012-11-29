@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BMtoKOPS.Scoring;
+using BMtoKOPS.KOPS;
 
 namespace BMtoKOPS {
     public class Board {

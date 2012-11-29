@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.Scoring{
     public class ScoringMP : IScoring {
         private int max;
 

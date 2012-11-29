@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace BMtoKOPS {
+namespace BMtoKOPS.KOPS {
     public static class KopsHelper {
         public static Double GetDoubleFromString(String str) {
             // prepare the string

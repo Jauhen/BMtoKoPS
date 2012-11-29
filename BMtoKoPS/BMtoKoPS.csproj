@@ -80,12 +80,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="board.cs" />
+    <Compile Include="Tournament\Board.cs" />
     <Compile Include="BwsHelper.cs" />
-    <Compile Include="Deal.cs" />
-    <Compile Include="iTournament.cs" />
-    <Compile Include="iScoring.cs" />
-    <Compile Include="kopsDeal.cs" />
+    <Compile Include="Tournament\Deal.cs" />
+    <Compile Include="Tournament\ITournament.cs" />
+    <Compile Include="Scoring\IScoring.cs" />
+    <Compile Include="KOPS\KopsDeal.cs" />
     <Compile Include="fMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,19 +104,19 @@
     <Compile Include="fMergePairTourn.Designer.cs">
       <DependentUpon>fMergePairTourn.cs</DependentUpon>
     </Compile>
-    <Compile Include="kopsHelper.cs" />
-    <Compile Include="kopsMultysession.cs" />
-    <Compile Include="kopsTournament.cs" />
-    <Compile Include="movement.cs" />
-    <Compile Include="multysessionResult.cs" />
-    <Compile Include="pairs.cs" />
+    <Compile Include="KOPS\KopsHelper.cs" />
+    <Compile Include="KOPS\KopsMultysession.cs" />
+    <Compile Include="KOPS\KopsTournament.cs" />
+    <Compile Include="Tournament\Movement.cs" />
+    <Compile Include="Tournament\MultysessionResult.cs" />
+    <Compile Include="Tournament\Pairs.cs" />
     <Compile Include="PairTournamentSetup.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PairTournamentSetup.Designer.cs">
       <DependentUpon>PairTournamentSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Player.cs" />
+    <Compile Include="Tournament\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="fMain.resx">
@@ -164,8 +164,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="scoringCSR.cs" />
-    <Compile Include="scoringMP.cs" />
+    <Compile Include="Scoring\ScoringCSR.cs" />
+    <Compile Include="Scoring\ScoringMP.cs" />
     <Compile Include="SessionPrintouts.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -173,7 +173,7 @@
       <DependentUpon>SessionPrintouts.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="tournament.cs" />
+    <Compile Include="Tournament\Tournament.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
