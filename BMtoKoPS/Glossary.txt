@@ -1,0 +1,9 @@
+﻿Glossary:
+
+Tournament Base: Number of rounds
+Round: set of 2 or 3 boards played at the table without movement
+Movement: define which pairs is played in this round at this table
+Board: Board played in tournament
+Deal: One record of played board
+Pair: pair of players played in tournament.
+Internal Pair Number: pair number in system
