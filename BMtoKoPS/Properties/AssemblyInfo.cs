@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BMtoKoPS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("EPAM Systems")]
+[assembly: AssemblyCompany("Jauhen Kutsuk")]
 [assembly: AssemblyProduct("BMtoKoPS")]
-[assembly: AssemblyCopyright("Copyright © EPAM Systems 2009")]
+[assembly: AssemblyCopyright("Copyright © Jauhen")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

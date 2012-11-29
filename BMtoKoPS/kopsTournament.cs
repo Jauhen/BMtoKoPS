@@ -2,7 +2,6 @@
 using System.IO;
 using System.Data;
 using System;
-using System.Linq;
 
 namespace BMtoKOPS
 {
@@ -380,12 +379,6 @@ namespace BMtoKOPS
                         minimax = line.Substring(10).TrimEnd(end);
                     }
                 }
-
-                if (!deal.Equals(String.Empty))
-                {
-                    boards[board++].SetPBN(deal, ability, minimax);
-                }
-
             }
             catch (FileNotFoundException)
             {

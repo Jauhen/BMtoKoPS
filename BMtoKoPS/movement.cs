@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace BMtoKOPS
@@ -193,7 +192,7 @@ namespace BMtoKOPS
             }
             else
             {
-                for (int i = 0; i < movement.Count(); i++)
+                for (int i = 0; i < movement.Count; i++)
                 {
                     movement[i].AddRange(apMovement[i]);
                 }

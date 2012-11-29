@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace BMtoKOPS
@@ -89,7 +88,7 @@ namespace BMtoKOPS
 
         public int GetNumberOfPairs()
         {
-            return pairs.Count();
+            return pairs.Count;
         }
 
     }
