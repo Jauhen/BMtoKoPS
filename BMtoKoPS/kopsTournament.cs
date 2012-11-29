@@ -3,23 +3,19 @@ using System.IO;
 using System.Data;
 using System;
 
-namespace BMtoKOPS
-{
-    public class KopsTournament : Tournament
-    {
+namespace BMtoKOPS {
+    public class KopsTournament : Tournament {
         private int pairsNumber;
         public int scoring;
 
-        public KopsTournament(string path)
-        {
+        public KopsTournament(string path) {
             this.path = path;
 
             StreamReader f = new StreamReader(path);
 
             List<string> file = new List<string>();
 
-            while (!f.EndOfStream)
-            {
+            while (!f.EndOfStream) {
                 file.Add(f.ReadLine().Split('*')[0]);
             }
 
@@ -29,7 +25,7 @@ namespace BMtoKOPS
 
             SetTournamentData(file);
 
-         //   InitDataSet();
+            //   InitDataSet();
 
             ReadPlayersNames();
         }
@@ -38,18 +34,14 @@ namespace BMtoKOPS
         /// Setup tournament
         /// </summary>
         /// <param name="data">KOPS inf file</param>
-        private void SetTournamentData(List<string> data)
-        {
+        private void SetTournamentData(List<string> data) {
             int tournamentBase = int.Parse(data[0]);
 
-            if (tournamentBase > 10000)
-            {
+            if (tournamentBase > 10000) {
                 tournamentBase -= 10000;
                 scoringMethod = new ScoringCSR();
                 scoring = 1;
-            }
-            else
-            {
+            } else {
                 scoringMethod = new ScoringMP();
                 scoring = 0;
             }
@@ -73,13 +65,12 @@ namespace BMtoKOPS
                 numerationJump = tournamentBase;
 
             for (int i = 0; i < numerationJump * 2 * (mitchellSections + 2); i++)
-             //for (int i = 0; i < 16; i++)
+            //for (int i = 0; i < 16; i++)
                 {
                 pairNumbers.Add(0);
             }
 
-            for (int i = 0; i < pairsNumber; i++)
-            {
+            for (int i = 0; i < pairsNumber; i++) {
                 pairNumbers[int.Parse(data[15 + i]) - 1] = i + 1;
             }
 
@@ -88,15 +79,14 @@ namespace BMtoKOPS
             movement = new Movement(tournamentBase, mitchellSections);
 
             movement.Generate(rounds, dealingRound, roundUntilLineChanged,
-                appendix > 0 ? data.GetRange(15 + pairsNumber, (appendix + 1) * 2 * tournamentBase) : null, 
+                appendix > 0 ? data.GetRange(15 + pairsNumber, (appendix + 1) * 2 * tournamentBase) : null,
                 pairsNumber, appendix);
 
             boards = new List<Board>();
 
             Nullable<int> index = ReadINR();
 
-            for (int i = 0; i < tournamentBase * dealsPerRound; i++)
-            {
+            for (int i = 0; i < tournamentBase * dealsPerRound; i++) {
                 //TODO: add processing of INR files
                 boards.Add(new Board(i + (index.HasValue ? index.Value : 0)));
             }
@@ -155,10 +145,9 @@ namespace BMtoKOPS
         /// <summary>
         /// 
         /// </summary>
-        public override void ReadResults()
-        {
-            String pathRes = String.Format(@"{0}\{1}.ZAP", 
-                Path.GetDirectoryName(path), 
+        public override void ReadResults() {
+            String pathRes = String.Format(@"{0}\{1}.ZAP",
+                Path.GetDirectoryName(path),
                 Path.GetFileNameWithoutExtension(path));
 
             BinaryReader fRes = new BinaryReader(File.OpenRead(pathRes));
@@ -166,53 +155,43 @@ namespace BMtoKOPS
             List<short> res = new List<short>();
             List<KopsDeal> readDeals = new List<KopsDeal>();
 
-            while (fRes.BaseStream.Position < fRes.BaseStream.Length)
-            {
+            while (fRes.BaseStream.Position < fRes.BaseStream.Length) {
                 res.Add(fRes.ReadInt16());
             }
 
             fRes.Close();
 
-            try
-            {
-                String pathDeal = String.Format(@"{0}\{1}.KNT", 
-                    Path.GetDirectoryName(path), 
+            try {
+                String pathDeal = String.Format(@"{0}\{1}.KNT",
+                    Path.GetDirectoryName(path),
                     Path.GetFileNameWithoutExtension(path));
 
                 BinaryReader fDeal = new BinaryReader(File.OpenRead(pathDeal));
 
-                while (fDeal.BaseStream.Position < fDeal.BaseStream.Length)
-                {
+                while (fDeal.BaseStream.Position < fDeal.BaseStream.Length) {
                     readDeals.Add(new KopsDeal(fDeal));
                 }
 
                 fDeal.Close();
 
-                if (res.Count != readDeals.Count)
-                {
+                if (res.Count != readDeals.Count) {
                     System.Windows.Forms.MessageBox.Show("Incorrect numbers of results");
                     return;
                 }
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 System.Windows.Forms.MessageBox.Show("No file with contracts");
-                for (int i = 0; i < res.Count; i++)
-                {
+                for (int i = 0; i < res.Count; i++) {
                     readDeals.Add(new KopsDeal(null));
                 }
             }
 
-            for (int i = 0; i < readDeals.Count; i++)
-            {
+            for (int i = 0; i < readDeals.Count; i++) {
                 readDeals[i].SetResult(res[i]);
             }
 
-            for (int i = 0; i < readDeals.Count / records; i++)
-            {
+            for (int i = 0; i < readDeals.Count / records; i++) {
                 List<KopsDeal> d = new List<KopsDeal>();
-                for (int j = 0; j < records; j++)
-                {
+                for (int j = 0; j < records; j++) {
                     d.Add(readDeals[i * records + j]);
                 }
                 boards[i].SetDeals(d);
@@ -226,9 +205,8 @@ namespace BMtoKOPS
             ReadPBN();
         }
 
-        private void ReadPlayersNames()
-        {
-            String path = String.Format(@"{0}\{1}.LUC", 
+        private void ReadPlayersNames() {
+            String path = String.Format(@"{0}\{1}.LUC",
                 Path.GetDirectoryName(this.path),
                 Path.GetFileNameWithoutExtension(this.path));
 
@@ -239,37 +217,31 @@ namespace BMtoKOPS
             f.Close();
 
 
-            for (int i = 0; i < pairsNumber; i++)
-            {
+            for (int i = 0; i < pairsNumber; i++) {
                 List<Player> playersNames = new List<Player>();
 
                 Player pl = new Player(s.Substring(i * 26 * 2, 26));
                 playersNames.Add(pl);
                 pl = new Player(s.Substring(i * 26 * 2 + 26, 26));
                 playersNames.Add(pl);
-                
+
                 Pairs.AddPair(playersNames);
             }
         }
 
-        private void ReadSessionResults()
-        {
+        private void ReadSessionResults() {
             String path = String.Format(@"{0}\{1}.SES",
                 Path.GetDirectoryName(this.path),
                 Path.GetFileNameWithoutExtension(this.path));
 
-            try
-            {
+            try {
                 StreamReader f = new StreamReader(path);
 
                 String type = f.ReadLine();
-                if (type.Equals("MAXY"))
-                {
+                if (type.Equals("MAXY")) {
                     sessionMax = int.Parse(f.ReadLine().Split('\t')[0]);
                     scoringMethod.SetMax(sessionMax);
-                }
-                else
-                {
+                } else {
                     f.ReadLine();
                     sessionMax = 100;
                 }
@@ -277,12 +249,10 @@ namespace BMtoKOPS
 
                 f.ReadLine();
 
-                while (!f.EndOfStream)
-                {
+                while (!f.EndOfStream) {
                     String s = f.ReadLine();
 
-                    if (s.Split('\t').Length > 2)
-                    {
+                    if (s.Split('\t').Length > 2) {
                         sessionResults.Add(int.Parse(s.Split('\t')[0]),
                             new KeyValuePair<double, double>(
                                 KopsHelper.GetDoubleFromString(s.Split('\t')[1]),
@@ -291,60 +261,48 @@ namespace BMtoKOPS
                 }
 
                 f.Close();
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 System.Windows.Forms.MessageBox.Show("No Session Results.");
             }
         }
 
-        private void ReadSessionName()
-        {
+        private void ReadSessionName() {
             String path = String.Format(@"{0}\{1}.NAG",
                 Path.GetDirectoryName(this.path),
                 Path.GetFileNameWithoutExtension(this.path));
 
             title = new List<string>();
 
-            try
-            {
+            try {
                 StreamReader f = new StreamReader(path);
                 title.AddRange(f.ReadLine().Split('\\'));
                 f.Close();
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 System.Windows.Forms.MessageBox.Show("No Session Name.");
             }
         }
 
-        private Nullable<int> ReadINR()
-        {
+        private Nullable<int> ReadINR() {
             String pathRes = String.Format(@"{0}\{1}.INR",
                 Path.GetDirectoryName(path),
                 Path.GetFileNameWithoutExtension(path));
 
-            try
-            {
+            try {
                 StreamReader reader = new StreamReader(pathRes);
                 String line = reader.ReadLine();
                 reader.Close();
                 return int.Parse(line);
-            }
-            catch (FileNotFoundException)
-            {
+            } catch (FileNotFoundException) {
                 return null;
             }
         }
 
-        private void ReadPBN()
-        {
+        private void ReadPBN() {
             String pathRes = String.Format(@"{0}\{1}.PBN",
                 Path.GetDirectoryName(path),
                 Path.GetFileNameWithoutExtension(path));
 
-            try
-            {
+            try {
                 StreamReader fRes = new StreamReader(pathRes);
                 String line;
                 // Read and display lines from the file until the end of 
@@ -356,34 +314,24 @@ namespace BMtoKOPS
                 String ability = String.Empty;
                 String minimax = String.Empty;
 
-                while ((line = fRes.ReadLine()) != null && board < boards.Count)
-                {
-                    if (line.StartsWith("[Deal "))
-                    {
-                        if (!deal.Equals(String.Empty))
-                        {
+                while ((line = fRes.ReadLine()) != null && board < boards.Count) {
+                    if (line.StartsWith("[Deal ")) {
+                        if (!deal.Equals(String.Empty)) {
                             boards[board++].SetPBN(deal, ability, minimax);
                             deal = String.Empty;
                             ability = String.Empty;
                             minimax = String.Empty;
                         }
                         deal = line.Substring(9, 67);
-                    }
-                    else if (line.StartsWith("[Ability "))
-                    {
+                    } else if (line.StartsWith("[Ability ")) {
                         ability = line.Substring(10, 31);
-                    }
-                    else if (line.StartsWith("[Minimax"))
-                    {
+                    } else if (line.StartsWith("[Minimax")) {
                         char[] end = { '"', ']' };
                         minimax = line.Substring(10).TrimEnd(end);
                     }
                 }
-            }
-            catch (FileNotFoundException)
-            {
+            } catch (FileNotFoundException) {
             }
         }
-
     }
 }

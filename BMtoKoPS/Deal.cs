@@ -2,26 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BMtoKOPS
-{
-    public class Deal
-    {
+namespace BMtoKOPS {
+    public class Deal {
         private Nullable<double> nsResult;
         private Nullable<double> ewResult;
 
-        public void SetResults(Nullable<double> ns, Nullable<double> ew)
-        {
+        public void SetResults(Nullable<double> ns, Nullable<double> ew) {
             nsResult = ns;
             ewResult = ew;
         }
 
-        public Nullable<double> GetNSResult()
-        {
+        public Nullable<double> GetNSResult() {
             return nsResult;
         }
 
-        public Nullable<double> GetEWResult()
-        {
+        public Nullable<double> GetEWResult() {
             return ewResult;
         }
     }

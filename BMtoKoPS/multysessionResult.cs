@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BMtoKOPS
-{
-    public class MultysessionResult
-    {
+namespace BMtoKOPS {
+    public class MultysessionResult {
         private int number;
         private string names;
         private double rank;
@@ -13,33 +11,27 @@ namespace BMtoKOPS
         private List<double> results;
         private double total;
 
-        public MultysessionResult(int number, string names, double rank, string region, int sessions)
-        {
+        public MultysessionResult(int number, string names, double rank, string region, int sessions) {
             this.number = number;
             this.names = names;
             this.rank = rank;
             this.region = region;
             results = new List<double>(sessions);
-            for (int i = 0; i < sessions; i++)
-            {
+            for (int i = 0; i < sessions; i++) {
                 results.Add(0);
             }
         }
 
-        public void SetResult(int session, double result)
-        {
+        public void SetResult(int session, double result) {
             results[session] = result;
         }
 
-        public void SetTotal(double total)
-        {
+        public void SetTotal(double total) {
             this.total = total;
         }
 
-        public String GetHTML(int place, bool isMax)
-        {
-            if (names.Equals("<nobr> &mdash; </nobr>"))
-            {
+        public String GetHTML(int place, bool isMax) {
+            if (names.Equals("<nobr> &mdash; </nobr>")) {
                 return "";
             }
 
@@ -51,8 +43,7 @@ namespace BMtoKOPS
                 rank,
                 region);
 
-            for (int i = 0; i < results.Count; i++)
-            {
+            for (int i = 0; i < results.Count; i++) {
                 res.AppendFormat(isMax ? @"<td style=""text-align: right"">{0:0.00}%</td>" : @"<td  style=""text-align: right"">{0:0.00}</td>",
                     results[i]);
             }
@@ -63,13 +54,11 @@ namespace BMtoKOPS
             return res.ToString();
         }
 
-        public int GetNumber()
-        {
+        public int GetNumber() {
             return number;
         }
 
-        public double GetTotal()
-        {
+        public double GetTotal() {
             return total;
         }
     }

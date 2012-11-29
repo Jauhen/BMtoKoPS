@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BMtoKOPS
-{
-    public interface ITournament
-    {
+namespace BMtoKOPS {
+    public interface ITournament {
         void ReadResults();
         String PrintResults();
         String PrintProtocols();

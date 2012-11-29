@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace BMtoKOPS
-{
-    public interface IScoring
-    {
+namespace BMtoKOPS {
+    public interface IScoring {
         void SetMax(int max);
         String PrintResult(double res);
         String PrintResult(double res, double max);

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Globalization;
 
-namespace BMtoKOPS
-{
-    public static class KopsHelper
-    {
-        public static Double GetDoubleFromString(String str)
-        {
+namespace BMtoKOPS {
+    public static class KopsHelper {
+        public static Double GetDoubleFromString(String str) {
             // prepare the string
             str = str.Trim(new char[] { '(', ')', ' ' });
 
@@ -16,8 +13,7 @@ namespace BMtoKOPS
             var format = new System.Globalization.NumberFormatInfo();
 
             // Try to covert string to number
-            if (!Double.TryParse(str, NumberStyles.Float, format, out res))
-            {
+            if (!Double.TryParse(str, NumberStyles.Float, format, out res)) {
                 if (format.NumberDecimalSeparator == ",")
                     format.NumberDecimalSeparator = ".";
                 else if (format.NumberDecimalSeparator == ".")
