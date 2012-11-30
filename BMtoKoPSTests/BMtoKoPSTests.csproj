@@ -60,6 +60,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ClubResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Integration\MultySectionTournament.cs" />
+    <Compile Include="Integration\MultySectionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultySectionResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="Tournament\PlayerTest.cs" />
   </ItemGroup>
@@ -67,6 +73,10 @@
     <EmbeddedResource Include="Integration\ClubResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ClubResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Integration\MultySectionResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MultySectionResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +86,16 @@
     <None Include="Resources\09-05.NAG" />
     <None Include="Resources\09-05.SES" />
     <None Include="Resources\09-05.ZAP" />
+    <None Include="Resources\p2.inr" />
+    <None Include="Resources\P2.KNT" />
+    <None Include="Resources\P2.LUC" />
+    <None Include="Resources\P2.NAG" />
+    <None Include="Resources\P2.pbn" />
+    <None Include="Resources\P2.SES" />
+    <None Include="Resources\P2.ZAP" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\P2.INF" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
