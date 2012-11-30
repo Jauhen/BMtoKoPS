@@ -1,0 +1,211 @@
+11 *BAZA
+11 *RUND
+3 *ROZD. W RUNDZIE
+0 *SEKTORY MITCHELLA
+11 *SKOK NUMERACJI
+11 *RUND DO OBROTU
+0 *POWIELANIE
+14 *ZAWODNICY
+7 *ZAPISY
+6 *SREDNIA, <0 = PESZKOWKA
+12 *MAX
+0 *BAZA / 2
+22 *2*BAZA
+33 *ROZDANIA
+7 *STOLIKI W SEKTORZE NIETYPOWYM
+2 *1   NUMERY NA SALI
+9 *2
+8 *3
+3 *4
+14 *5
+4 *6
+7 *7
+13 *8
+5 *9
+6 *10
+11 *11
+12 *12
+10 *13
+1 *14
+7 *LICZBA ZAP. DLA KOMPLETU #1
+0 *W SEKTORZE NIETYPOWYM
+14      1 *NS
+1      1 *EW
+2      2 *NS
+10      2 *EW
+6      3 *NS
+12      3 *EW
+9      4 *NS
+13      4 *EW
+4      5 *NS
+11      5 *EW
+7      6 *NS
+8      6 *EW
+3      7 *NS
+5      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #2
+0 *W SEKTORZE NIETYPOWYM
+4      1 *NS
+6      1 *EW
+14      2 *NS
+2      2 *EW
+3      3 *NS
+11      3 *EW
+7      4 *NS
+12      4 *EW
+10      5 *NS
+13      5 *EW
+5      6 *NS
+1      6 *EW
+8      7 *NS
+9      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #3
+0 *W SEKTORZE NIETYPOWYM
+9      1 *NS
+10      1 *EW
+5      2 *NS
+7      2 *EW
+14      3 *NS
+3      3 *EW
+4      4 *NS
+1      4 *EW
+8      5 *NS
+12      5 *EW
+11      6 *NS
+13      6 *EW
+6      7 *NS
+2      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #4
+0 *W SEKTORZE NIETYPOWYM
+7      1 *NS
+3      1 *EW
+10      2 *NS
+11      2 *EW
+6      3 *NS
+8      3 *EW
+14      4 *NS
+4      4 *EW
+5      5 *NS
+2      5 *EW
+9      6 *NS
+12      6 *EW
+1      7 *NS
+13      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #5
+0 *W SEKTORZE NIETYPOWYM
+2      1 *NS
+13      1 *EW
+8      2 *NS
+4      2 *EW
+11      3 *NS
+1      3 *EW
+7      4 *NS
+9      4 *EW
+14      5 *NS
+5      5 *EW
+6      6 *NS
+3      6 *EW
+10      7 *NS
+12      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #6
+0 *W SEKTORZE NIETYPOWYM
+11      1 *NS
+12      1 *EW
+3      2 *NS
+13      2 *EW
+9      3 *NS
+5      3 *EW
+1      4 *NS
+2      4 *EW
+8      5 *NS
+10      5 *EW
+14      6 *NS
+6      6 *EW
+7      7 *NS
+4      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #7
+0 *W SEKTORZE NIETYPOWYM
+8      1 *NS
+5      1 *EW
+1      2 *NS
+12      2 *EW
+4      3 *NS
+13      3 *EW
+10      4 *NS
+6      4 *EW
+2      5 *NS
+3      5 *EW
+9      6 *NS
+11      6 *EW
+14      7 *NS
+7      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #8
+0 *W SEKTORZE NIETYPOWYM
+9      1 *NS
+6      1 *EW
+2      2 *NS
+12      2 *EW
+5      3 *NS
+13      3 *EW
+11      4 *NS
+7      4 *EW
+3      5 *NS
+4      5 *EW
+10      6 *NS
+1      6 *EW
+14      7 *NS
+8      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #9
+0 *W SEKTORZE NIETYPOWYM
+10      1 *NS
+7      1 *EW
+3      2 *NS
+12      2 *EW
+6      3 *NS
+13      3 *EW
+1      4 *NS
+8      4 *EW
+4      5 *NS
+5      5 *EW
+11      6 *NS
+2      6 *EW
+14      7 *NS
+9      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #10
+0 *W SEKTORZE NIETYPOWYM
+11      1 *NS
+8      1 *EW
+4      2 *NS
+12      2 *EW
+7      3 *NS
+13      3 *EW
+2      4 *NS
+9      4 *EW
+5      5 *NS
+6      5 *EW
+1      6 *NS
+3      6 *EW
+14      7 *NS
+10      7 *EW
+7 *LICZBA ZAP. DLA KOMPLETU #11
+0 *W SEKTORZE NIETYPOWYM
+1      1 *NS
+9      1 *EW
+5      2 *NS
+12      2 *EW
+8      3 *NS
+13      3 *EW
+3      4 *NS
+10      4 *EW
+6      5 *NS
+7      5 *EW
+2      6 *NS
+4      6 *EW
+14      7 *NS
+11      7 *EW
+-2 *-RUCH_EW-1
+0 *ZMN
+0 *STOLIK ZJAZDOWY
+* DZIELENIE SEKTORA NIETYPOWEGO
+0
+DEAL X:\RZD\201209R.RZD	* Plik z rozkladami

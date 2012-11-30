@@ -80,6 +80,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="KOPS\IReader.cs" />
+    <Compile Include="KOPS\KopsReader.cs" />
     <Compile Include="Tournament\Board.cs" />
     <Compile Include="BwsHelper.cs" />
     <Compile Include="Tournament\Deal.cs" />

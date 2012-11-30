@@ -47,11 +47,35 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\NUnit 2.6.2\bin\framework\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.mocks, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\NUnit 2.6.2\bin\framework\nunit.mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration\ClubTournament.cs" />
+    <Compile Include="Integration\ClubResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClubResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="Tournament\PlayerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Integration\ClubResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClubResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\09-05.INF" />
+    <None Include="Resources\09-05.KNT" />
+    <None Include="Resources\09-05.LUC" />
+    <None Include="Resources\09-05.NAG" />
+    <None Include="Resources\09-05.SES" />
+    <None Include="Resources\09-05.ZAP" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

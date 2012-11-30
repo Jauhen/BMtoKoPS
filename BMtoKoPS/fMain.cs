@@ -57,7 +57,7 @@ namespace BMtoKOPS
 
                     foreach (string s in str)
                     {
-                        KopsTournament t = new KopsTournament(s);
+                        KopsTournament t = new KopsTournament(s, new KopsReader());
                         tournaments.Add(t);
                         /* add new tab for tournament */
                         TabPage tp = new TabPage(Path.GetFileNameWithoutExtension(s));

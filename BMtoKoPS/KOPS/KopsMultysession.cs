@@ -34,7 +34,7 @@ namespace BMtoKOPS.KOPS {
             for (int i = 0; i < sessions; i++) {
                 tournaments.Add(new KopsTournament(String.Format(@"{0}\{1}.INF",
                     Path.GetDirectoryName(path),
-                    file[i + 1])));
+                    file[i + 1]), new KopsReader()));
             }
 
             for (int i = 1; i < sessions + 1; i++) {
