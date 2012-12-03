@@ -3,6 +3,10 @@ using System.Globalization;
 
 namespace BMtoKOPS.KOPS {
     public static class KopsHelper {
+        public static System.Globalization.CultureInfo GetLocalInfo() {
+            return new System.Globalization.CultureInfo("ru-RU");
+        }
+
         public static Double GetDoubleFromString(String str) {
             // prepare the string
             str = str.Trim(new char[] { '(', ')', ' ' });

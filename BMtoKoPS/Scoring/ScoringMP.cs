@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BMtoKOPS.KOPS;
 
 namespace BMtoKOPS.Scoring{
     public class ScoringMP : IScoring {
@@ -11,11 +12,11 @@ namespace BMtoKOPS.Scoring{
         }
 
         public String PrintResult(double res) {
-            return String.Format("{0:0.00}%", 100.0 * res / max);
+            return String.Format(KopsHelper.GetLocalInfo() ,"{0:0.00}%", 100.0 * res / max);
         }
 
         public String PrintResult(double res, double sessionMax) {
-            return String.Format("{0:0.00}%", 100.0 * res / sessionMax);
+            return String.Format(KopsHelper.GetLocalInfo(), "{0:0.00}%", 100.0 * res / sessionMax);
         }
 
         public double GetDiff(short res1, short res2) {

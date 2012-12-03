@@ -8,7 +8,7 @@ namespace BMtoKoPSTests {
   public class Tests {
     public static void Main() {
       AppDomain.CurrentDomain.ExecuteAssembly(
-          @"C:\Program Files\NUnit 2.6.2\bin\NUnit-console.exe",
+          @"C:\Program Files (x86)\NUnit\bin\NUnit-console.exe",
           null,
           new string[] { Assembly.GetExecutingAssembly().Location });
     }

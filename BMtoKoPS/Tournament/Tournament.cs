@@ -53,7 +53,7 @@ namespace BMtoKOPS {
                 int pairNumber = Pairs.GetInternalPairNumber(n);
 
                 if (Pairs.GetPairNames(pairNumber).Length > 0) {
-                    res.AppendFormat(Resource1.ProtocolsHTMLTableResultBody,
+                    res.AppendFormat(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableResultBody,
                         place,
                         n.ToString(),
                         Pairs.GetPairNames(pairNumber),
@@ -81,7 +81,7 @@ namespace BMtoKOPS {
             StringBuilder res = new StringBuilder();
             res.Append(
                 PrintTitle(
-                    String.Format(Resource1.ProtocolsHTMLTableHistoryHeader,
+                    String.Format(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableHistoryHeader,
                         n,
                         Pairs.GetPairNames(Pairs.GetInternalPairNumber(n)),
                         Pairs.GetPairRank(Pairs.GetInternalPairNumber(n)),
@@ -95,7 +95,7 @@ namespace BMtoKOPS {
             res.Append(PrintPlayerHistoryRows(n));
 
             if (sessionMax > 0) {
-                res.AppendFormat(Resource1.ProtocolsHTMLTableHistoryFooter,
+                res.AppendFormat(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableHistoryFooter,
                         scoringMethod.PrintResult(sessionResults[n].Value),
                         scoringMethod.PrintResult(sessionResults[n].Key));
             }
@@ -136,7 +136,7 @@ namespace BMtoKOPS {
                 if (op != 0) {
                     if (i % dealsPerRound == 0) {
                         int pairInternalNumber = Pairs.GetInternalPairNumber(Pairs.GetPairNumber(op));
-                        res.AppendFormat(@"<tr><td class=""right nbr1"" rowspan=""{0}"">{1}</td>
+                        res.AppendFormat(KopsHelper.GetLocalInfo(), @"<tr><td class=""right nbr1"" rowspan=""{0}"">{1}</td>
                          <td class=""nbr"" rowspan=""{0}"">{2}</td>
                             <td class=""right nbr"" rowspan=""{0}"">{3}</td>
                              <td class=""nbr"" rowspan=""{0}"">{4}</td>",
@@ -144,14 +144,14 @@ namespace BMtoKOPS {
                                Pairs.GetPairNumber(op),
                                Pairs.GetPairNames(pairInternalNumber),
                                Pairs.GetPairRank(pairInternalNumber) > 0 ?
-                                String.Format("{0:0.0}",
+                                String.Format(KopsHelper.GetLocalInfo(), "{0:0.0}",
                                  Pairs.GetPairRank(pairInternalNumber)) : "",
                                Pairs.GetPairRegion(pairInternalNumber));
                     } else {
                         res.Append("<tr>");
                     }
 
-                    res.AppendFormat(@"<td class=""right"">{0}</td><td>{1}</td>{2}<td class=""right"">{3}</td></tr>",
+                    res.AppendFormat(KopsHelper.GetLocalInfo(), @"<td class=""right"">{0}</td><td>{1}</td>{2}<td class=""right"">{3}</td></tr>",
                         boards[i].GetBoardNumber(),
                         line, deal.GetHtml(line.Equals("NS") ? 1 : -1),
                         result.HasValue ? scoringMethod.PrintResult(result.Value, 2.0 * maxNumberOfRecords - 2.0) :

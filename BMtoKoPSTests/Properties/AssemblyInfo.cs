@@ -6,12 +6,12 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BMtoKoPS")]
+[assembly: AssemblyTitle("BMtoKoPSTests.Properties")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jauhen Kutsuk")]
-[assembly: AssemblyProduct("BMtoKoPS")]
-[assembly: AssemblyCopyright("Copyright © Jauhen")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("BMtoKoPSTests.Properties")]
+[assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a5d2a02c-3358-437f-8469-77ba7bbd11f6")]
+[assembly: Guid("932c7a9e-0b3d-4fa7-90f1-b43f10121f30")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -30,9 +30,6 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("ru")]
