@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace BMtoKOPS {
-    public interface ITournament {
-        void ReadResults();
-        String PrintResults();
-        String PrintProtocols();
-        String PrintAllHistories();
-        String PrintListHistories(List<int> nums);
-    }
+  public interface ITournament {
+    void ReadResults();
+    String PrintResults();
+    String PrintProtocols();
+    String PrintAllHistories();
+    String PrintListHistories(List<int> nums);
+  }
 }
