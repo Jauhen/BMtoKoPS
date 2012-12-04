@@ -64,7 +64,6 @@ namespace BMtoKOPS.Output {
     }
 
     public class Builder {
-
       private HtmlResults result = new HtmlResults();
 
       public Builder() {

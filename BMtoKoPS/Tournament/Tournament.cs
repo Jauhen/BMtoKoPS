@@ -218,22 +218,14 @@ namespace BMtoKOPS {
     }
 
     public String PrintProtocols() {
-      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
+      HtmlProtocols.Builder htmlProtocolBuilder = HtmlProtocols.newBuilder();
+      htmlProtocolBuilder.Title(title);
 
       for (int i = 0; i < boards.Count; i++) {
-        if (i % dealsPerRound == 0) {
-          if (i != 0) {
-            res.Append("</tr></table>");
-          }
-          res.Append(@"<table class=""main"" style=""page-break-after: auto""><tr>");
-        }
-
-        res.AppendFormat("<td>{0}</td>", GetBoardResults(i));
+        htmlProtocolBuilder.AddBoard(GetBoardResults(i));
       }
 
-
-      res.Append(@"</tr></table>").Append(HtmlResources.ProtocolsHTMLEnd);
-      return res.ToString();
+      return htmlProtocolBuilder.build().print(dealsPerRound);
     }
 
     protected String GetTitle() {
