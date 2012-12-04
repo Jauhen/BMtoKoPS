@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using BMtoKOPS.Output;
 using BMtoKOPS.Scoring;
 using BMtoKOPS.KOPS;
 
@@ -24,24 +25,20 @@ namespace BMtoKOPS {
     public IScoring scoringMethod;
     protected List<Board> boards;
 
-    public Tournament() {
-    }
-
-    private String PrintTitle(String type) {
-      return String.Format(Resource1.ProtocolsHTMLHeader,
-          Resource1.logo,
-          GetTitle(),
-          type);
-    }
+    public Tournament() {}
 
     public virtual void ReadResults() {
       throw new NotImplementedException("ReadResults not implemented for Tournament class.");
     }
 
+    /// <summary>
+    /// Print tournament results.
+    /// </summary>
+    /// <returns>Htmls of result.</returns>
     public String PrintResults() {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
-      res.Append(PrintTitle("Result"));
-      res.Append(Resource1.ProtocolsHTMLTableResultHeader);
+      HtmlResults.Builder htmlResultBuilder = HtmlResults.newBuilder();
+
+      htmlResultBuilder.Title(title);
 
       IEnumerable<KeyValuePair<int, KeyValuePair<double, double>>> places =
           sessionResults.OrderByDescending(result => result.Value.Key);
@@ -53,35 +50,30 @@ namespace BMtoKOPS {
         int pairNumber = Pairs.GetInternalPairNumber(n);
 
         if (Pairs.GetPairNames(pairNumber).Length > 0) {
-          res.AppendFormat(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableResultBody,
-              place,
-              n.ToString(),
-              Pairs.GetPairNames(pairNumber),
-              Pairs.GetPairRank(pairNumber),
-              Pairs.GetPairRegion(pairNumber),
-              sessionMax > 0 &&
-                  pair.Value.Value != 0 ?
-                      scoringMethod.PrintResult(pair.Value.Value) : "",
-              sessionMax > 0 ? scoringMethod.PrintResult(pair.Value.Key) : ""
-              );
-        }
-        if (place > 1 && place % 36 == 0) {
-          res.Append(Resource1.ProtocolsHTMLTableResultFooter);
-          res.Append(PrintTitle("Result"));
-          res.Append(Resource1.ProtocolsHTMLTableResultHeader);
+          Dictionary<string, object> map = new Dictionary<string, object>(7);
+          map.Add("place", place);
+          map.Add("number", n);
+          map.Add("names", Pairs.GetPairNames(pairNumber));
+          map.Add("rank", Pairs.GetPairRank(pairNumber));
+          map.Add("region", Pairs.GetPairRegion(pairNumber));
+          map.Add("correction", sessionMax > 0 && pair.Value.Value != 0 ?
+              scoringMethod.PrintResult(pair.Value.Value) : "");
+          map.Add("result", sessionMax > 0 ? scoringMethod.PrintResult(pair.Value.Key) : "");
+
+          htmlResultBuilder.AddRecord(map);
         }
 
         place++;
       }
 
-      return res.ToString();
+      return htmlResultBuilder.build().print();
     }
 
     public String PrintPlayerHistory(int n) {
       StringBuilder res = new StringBuilder();
       res.Append(
           PrintTitle(
-              String.Format(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableHistoryHeader,
+              String.Format(KopsHelper.GetLocalInfo(), HtmlResources.ProtocolsHTMLTableHistoryHeader,
                   n,
                   Pairs.GetPairNames(Pairs.GetInternalPairNumber(n)),
                   Pairs.GetPairRank(Pairs.GetInternalPairNumber(n)),
@@ -90,12 +82,12 @@ namespace BMtoKOPS {
           )
       );
 
-      res.Append(Resource1.histHead);
+      res.Append(HtmlResources.histHead);
 
       res.Append(PrintPlayerHistoryRows(n));
 
       if (sessionMax > 0) {
-        res.AppendFormat(KopsHelper.GetLocalInfo(), Resource1.ProtocolsHTMLTableHistoryFooter,
+        res.AppendFormat(KopsHelper.GetLocalInfo(), HtmlResources.ProtocolsHTMLTableHistoryFooter,
                 scoringMethod.PrintResult(sessionResults[n].Value),
                 scoringMethod.PrintResult(sessionResults[n].Key));
       }
@@ -168,7 +160,7 @@ namespace BMtoKOPS {
       StringBuilder res = new StringBuilder();
       res.AppendFormat(@"<h1>Board {0}</h1><div style=""text-align: center"">{1}</div>",
           boards[n].GetBoardNumber(), boards[n].PrintHeader());
-      res.Append(Resource1.ProtocolsHTMLTableProtocolHeader);
+      res.Append(HtmlResources.ProtocolsHTMLTableProtocolHeader);
 
       for (int i = 0; i < movement.Deals(round); i++) {
         String ns = "";
@@ -188,7 +180,7 @@ namespace BMtoKOPS {
             ew = boards[n].GetDeal(i).tdResult.Split('/')[1] + ".0%";
           }
         }
-        res.AppendFormat(Resource1.ProtocolsHTMLTableProtocolRow,
+        res.AppendFormat(HtmlResources.ProtocolsHTMLTableProtocolRow,
             Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetNS(round, i) : movement.GetEW(round, i)).ToString(),
             Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetEW(round, i) : movement.GetNS(round, i)).ToString(),
             boards[n].GetDeal(i).GetHtml(1),
@@ -202,7 +194,7 @@ namespace BMtoKOPS {
     }
 
     public String PrintAllHistories() {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
 
       for (int i = 0; i < Pairs.GetMaxNumber(); i++) {
         if (Pairs.GetNumber(i) > 0) {
@@ -214,7 +206,7 @@ namespace BMtoKOPS {
     }
 
     public String PrintListHistories(List<int> nums) {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
 
       for (int i = 0; i < nums.Count; i++) {
         if (Pairs.GetNumber(nums[i] - 1) > 0) {
@@ -226,7 +218,7 @@ namespace BMtoKOPS {
     }
 
     public String PrintProtocols() {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
 
       for (int i = 0; i < boards.Count; i++) {
         if (i % dealsPerRound == 0) {
@@ -240,7 +232,7 @@ namespace BMtoKOPS {
       }
 
 
-      res.Append(@"</tr></table>").Append(Resource1.ProtocolsHTMLEnd);
+      res.Append(@"</tr></table>").Append(HtmlResources.ProtocolsHTMLEnd);
       return res.ToString();
     }
 
@@ -248,11 +240,19 @@ namespace BMtoKOPS {
       StringBuilder res = new StringBuilder();
       for (int i = 0; i < title.Count; i++) {
         if (!title[i].Equals(String.Empty)) {
-          res.AppendFormat(Resource1.ProtocolsHTMLTitle,
+          res.AppendFormat(HtmlResources.ProtocolsHTMLTitle,
               title[i]);
         }
       }
       return res.ToString();
+    }
+
+
+    private String PrintTitle(String type) {
+      return String.Format(HtmlResources.ProtocolsHTMLHeader,
+          HtmlResources.logo,
+          GetTitle(),
+          type);
     }
 
     protected void CalculateResults() {

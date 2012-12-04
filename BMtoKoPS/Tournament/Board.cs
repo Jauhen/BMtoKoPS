@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using BMtoKOPS.Scoring;
 using BMtoKOPS.KOPS;
+using BMtoKOPS.Output;
 
 namespace BMtoKOPS {
   public class Board {
@@ -161,7 +162,7 @@ namespace BMtoKOPS {
     public string PrintHeader() {
       if (hasPBN) {
         //TODO: PBN without maxs
-        return String.Format(Resource1.ProtocolsHTMLTablePBN,
+        return String.Format(HtmlResources.ProtocolsHTMLTablePBN,
             Dealer(), //0
             Vulnerable(), //1
             GetCards("N"), //2

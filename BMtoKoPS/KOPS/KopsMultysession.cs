@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using BMtoKOPS.KOPS;
+using BMtoKOPS.Output;
 
 namespace BMtoKOPS.KOPS {
   public class KopsMultysession : ITournament {
@@ -109,7 +110,7 @@ namespace BMtoKOPS.KOPS {
     }
 
     public String PrintResults() {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
       res.Append(PrintTitle("Result"));
       res.Append(ProtocolsHTMLTableResultHeader());
 
@@ -123,7 +124,7 @@ namespace BMtoKOPS.KOPS {
         res.Append(r.GetHTML(place, tournaments[0].scoring == 0));
 
         if (place > 1 && place % (tournaments.Count < 3 ? 37 : 60) == 0) {
-          res.Append(Resource1.ProtocolsHTMLTableResultFooter);
+          res.Append(HtmlResources.ProtocolsHTMLTableResultFooter);
           res.Append(PrintTitle("Result"));
           res.Append(ProtocolsHTMLTableResultHeader());
         }
@@ -139,7 +140,7 @@ namespace BMtoKOPS.KOPS {
     }
 
     public String PrintAllHistories() {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
 
       IEnumerable<MultysessionResult> places =
           results.OrderByDescending(result => result.GetNumber());
@@ -153,7 +154,7 @@ namespace BMtoKOPS.KOPS {
     }
 
     public String PrintListHistories(List<int> nums) {
-      StringBuilder res = new StringBuilder(Resource1.ProtocolsHTMLBegin);
+      StringBuilder res = new StringBuilder(HtmlResources.ProtocolsHTMLBegin);
 
       for (int i = 0; i < nums.Count; i++) {
         if (baseTournament.Pairs.GetNumber(nums[i] - 1) > 0) {
@@ -165,14 +166,14 @@ namespace BMtoKOPS.KOPS {
     }
 
     private String PrintTitle(String type) {
-      return String.Format(Resource1.ProtocolsHTMLHeader,
-          Resource1.logo,
+      return String.Format(HtmlResources.ProtocolsHTMLHeader,
+          HtmlResources.logo,
           "Total",
           type);
     }
 
     private String ProtocolsHTMLTableResultHeader() {
-      String res = Resource1.ProtocolsHTMLTableResultHeader;
+      String res = HtmlResources.ProtocolsHTMLTableResultHeader;
 
       StringBuilder res2 = new StringBuilder();
 
@@ -189,7 +190,7 @@ namespace BMtoKOPS.KOPS {
       StringBuilder res = new StringBuilder();
       res.Append(
           PrintTitle(
-              String.Format(Resource1.ProtocolsHTMLTableHistoryHeader,
+              String.Format(HtmlResources.ProtocolsHTMLTableHistoryHeader,
                   n,
                   baseTournament.Pairs.GetPairNames(baseTournament.Pairs.GetInternalPairNumber(n)),
                   baseTournament.Pairs.GetPairRank(baseTournament.Pairs.GetInternalPairNumber(n)),
@@ -199,13 +200,13 @@ namespace BMtoKOPS.KOPS {
           )
       );
 
-      res.Append(Resource1.histHead);
+      res.Append(HtmlResources.histHead);
 
       for (int i = 0; i < tournaments.Count; i++) {
         res.Append(tournaments[i].PrintPlayerHistoryRows(n));
       }
 
-      res.AppendFormat(Resource1.ProtocolsHTMLTableHistoryFooter,
+      res.AppendFormat(HtmlResources.ProtocolsHTMLTableHistoryFooter,
               "",
               String.Format(tournaments[0].scoring == 0 ? "{0:0.00}%" : "{0:0.00}",
                   results[baseTournament.Pairs.GetInternalPairNumber(n)].GetTotal()));

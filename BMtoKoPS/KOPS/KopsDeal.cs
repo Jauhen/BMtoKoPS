@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using BMtoKOPS.Output;
 
 namespace BMtoKOPS.KOPS {
   public class KopsDeal : Deal {
@@ -207,53 +208,53 @@ namespace BMtoKOPS.KOPS {
         return "";
 
       if (s.IndexOf('C') > -1) {
-        return s.Replace("C", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", Resource1.c));
+        return s.Replace("C", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.c));
       }
       if (s.IndexOf('D') > -1) {
-        return s.Replace("D", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", Resource1.d));
+        return s.Replace("D", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.d));
       }
       if (s.IndexOf('H') > -1) {
-        return s.Replace("H", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", Resource1.h));
+        return s.Replace("H", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.h));
       }
       if (s.IndexOf('S') > -1) {
-        return s.Replace("S", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", Resource1.s));
+        return s.Replace("S", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.s));
       }
       if (s.IndexOf('N') > -1) {
-        return s.Replace("N", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", Resource1.n));
+        return s.Replace("N", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.n));
       }
       switch (s) {
         case "G1":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d1);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d1);
         case "G2":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d2);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d2);
         case "G3":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d3);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d3);
         case "G4":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d4);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d4);
         case "G5":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d5);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d5);
         case "G6":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d6);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d6);
         case "G7":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d7);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d7);
         case "G8":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d8);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d8);
         case "G9":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d9);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d9);
         case "G10":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d10);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d10);
         case "G11":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d11);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d11);
         case "G12":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d12);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d12);
         case "G13":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d13);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d13);
         case "G14":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d14);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d14);
         case "G15":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d15);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d15);
         case "G16":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", Resource1.d16);
+          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d16);
       }
       return s;
     }
