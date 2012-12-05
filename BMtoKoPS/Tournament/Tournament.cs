@@ -36,9 +36,9 @@ namespace BMtoKOPS {
     /// </summary>
     /// <returns>Htmls of result.</returns>
     public String PrintResults() {
-      HtmlResults.Builder htmlResultBuilder = HtmlResults.newBuilder();
+      HtmlResults htmlResult = new HtmlResults();
 
-      htmlResultBuilder.Title(title);
+      htmlResult.Title = title;
 
       IEnumerable<KeyValuePair<int, KeyValuePair<double, double>>> places =
           sessionResults.OrderByDescending(result => result.Value.Key);
@@ -50,23 +50,24 @@ namespace BMtoKOPS {
         int pairNumber = Pairs.GetInternalPairNumber(n);
 
         if (Pairs.GetPairNames(pairNumber).Length > 0) {
-          Dictionary<string, object> map = new Dictionary<string, object>(7);
-          map.Add("place", place);
-          map.Add("number", n);
-          map.Add("names", Pairs.GetPairNames(pairNumber));
-          map.Add("rank", Pairs.GetPairRank(pairNumber));
-          map.Add("region", Pairs.GetPairRegion(pairNumber));
-          map.Add("correction", sessionMax > 0 && pair.Value.Value != 0 ?
-              scoringMethod.PrintResult(pair.Value.Value) : "");
-          map.Add("result", sessionMax > 0 ? scoringMethod.PrintResult(pair.Value.Key) : "");
+          HtmlResults.Record record = new HtmlResults.Record();
+          
+          record.Place = place;
+          record.Number = n;
+          record.Names = Pairs.GetPairNames(pairNumber);
+          record.Rank = Pairs.GetPairRank(pairNumber);
+          record.Region = Pairs.GetPairRegion(pairNumber);
+          record.Correction = sessionMax > 0 && pair.Value.Value != 0 ?
+              scoringMethod.PrintResult(pair.Value.Value) : "";
+          record.Result = sessionMax > 0 ? scoringMethod.PrintResult(pair.Value.Key) : "";
 
-          htmlResultBuilder.AddRecord(map);
+          htmlResult.Records.Add(record);
         }
 
         place++;
       }
 
-      return htmlResultBuilder.build().print();
+      return htmlResult.print();
     }
 
     public String PrintPlayerHistory(int n) {
@@ -154,13 +155,15 @@ namespace BMtoKOPS {
       return res.ToString();
     }
 
-    public String GetBoardResults(int n) {
+    public HtmlProtocols.Board GetBoardResults(int n) {
+      HtmlProtocols.Board board = new HtmlProtocols.Board();
+
       int round = n / dealsPerRound;
 
+      board.Number = boards[n].GetBoardNumber();
+      board.Header = boards[n].PrintHeader();
+
       StringBuilder res = new StringBuilder();
-      res.AppendFormat(@"<h1>Board {0}</h1><div style=""text-align: center"">{1}</div>",
-          boards[n].GetBoardNumber(), boards[n].PrintHeader());
-      res.Append(HtmlResources.ProtocolsHTMLTableProtocolHeader);
 
       for (int i = 0; i < movement.Deals(round); i++) {
         String ns = "";
@@ -180,17 +183,19 @@ namespace BMtoKOPS {
             ew = boards[n].GetDeal(i).tdResult.Split('/')[1] + ".0%";
           }
         }
-        res.AppendFormat(HtmlResources.ProtocolsHTMLTableProtocolRow,
-            Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetNS(round, i) : movement.GetEW(round, i)).ToString(),
-            Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetEW(round, i) : movement.GetNS(round, i)).ToString(),
-            boards[n].GetDeal(i).GetHtml(1),
-            ns,
-            ew);
+
+        HtmlProtocols.Deal deal = new HtmlProtocols.Deal();
+
+        deal.NsNumber = Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetNS(round, i) : movement.GetEW(round, i)).ToString();
+        deal.EwNumber = Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetEW(round, i) : movement.GetNS(round, i)).ToString();
+        deal.Play = boards[n].GetDeal(i).GetHtml(1);
+        deal.NsResult = ns;
+        deal.EwResult = ew;
+
+        board.Deals.Add(deal);
       }
 
-      res.Append("</table>");
-
-      return res.ToString();
+      return board;
     }
 
     public String PrintAllHistories() {
@@ -218,14 +223,14 @@ namespace BMtoKOPS {
     }
 
     public String PrintProtocols() {
-      HtmlProtocols.Builder htmlProtocolBuilder = HtmlProtocols.newBuilder();
-      htmlProtocolBuilder.Title(title);
+      HtmlProtocols htmlProtocol = new HtmlProtocols();
+      htmlProtocol.Title = title;
 
       for (int i = 0; i < boards.Count; i++) {
-        htmlProtocolBuilder.AddBoard(GetBoardResults(i));
+        htmlProtocol.Boards.Add(GetBoardResults(i));
       }
 
-      return htmlProtocolBuilder.build().print(dealsPerRound);
+      return htmlProtocol.print(dealsPerRound);
     }
 
     protected String GetTitle() {

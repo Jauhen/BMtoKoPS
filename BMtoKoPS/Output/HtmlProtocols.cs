@@ -5,13 +5,11 @@ using System.Text;
 
 namespace BMtoKOPS.Output {
   public class HtmlProtocols {
-    public List<String> Title { get; private set; }
-    public List<String> Boards { get; private set; }
+    public List<String> Title { get; set; }
+    public List<Board> Boards { get; set; }
 
-    private HtmlProtocols() {}
-
-    public static Builder newBuilder() {
-      return new Builder();
+    public HtmlProtocols() {
+      Boards = new List<Board>();
     }
 
     private String GetHeader(String type) {
@@ -39,7 +37,7 @@ namespace BMtoKOPS.Output {
           res.Append(@"<table class=""main"" style=""page-break-after: auto""><tr>");
         }
 
-        res.AppendFormat("<td>{0}</td>", Boards[i]);
+        res.AppendFormat("<td>{0}</td>", Boards[i].print());
       }
 
       res.Append(@"</tr></table>").Append(HtmlResources.ProtocolsHTMLEnd);
@@ -47,29 +45,44 @@ namespace BMtoKOPS.Output {
       return res.ToString();
     }
 
-    public class Builder {
+    public class Board {
+      public int Number { get; set; }
+      public string Header { get; set; }
+      public List<Deal> Deals { get; set; }
 
-      private HtmlProtocols result = new HtmlProtocols();
-
-      public Builder() {
-        result.Boards = new List<string>();
+      public Board() {
+        Deals = new List<Deal>();
       }
 
-      public HtmlProtocols build() {
-        var res = result;
-        result = null;
+      public String print() {
+        StringBuilder res = new StringBuilder();
+        res.AppendFormat(@"<h1>Board {0}</h1><div style=""text-align: center"">{1}</div>",
+            Number, Header);
 
-        return res;
+        res.Append(HtmlResources.ProtocolsHTMLTableProtocolHeader);
+
+        foreach (Deal deal in Deals) {
+          res.Append(deal.print());
+        }
+
+        res.Append("</table>");
+
+        return res.ToString();
       }
+    }
 
-      public Builder Title(List<string> title) {
-        result.Title = title;
-        return this;
-      }
+    public class Deal {
+      public string NsNumber { private get; set; }
+      public string EwNumber { private get; set; }
+      public string Play { private get; set; }
+      public string NsResult { private get; set; }
+      public string EwResult { private get; set; }
 
-      public Builder AddBoard(string board) {
-        result.Boards.Add(board);
-        return this;
+      public Deal() {}
+
+      public String print() {
+        return String.Format(HtmlResources.ProtocolsHTMLTableProtocolRow,
+              NsNumber, EwNumber, Play, NsResult, EwResult);
       }
     }
   }

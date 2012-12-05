@@ -9,13 +9,11 @@ namespace BMtoKOPS.Output {
   /// Print tournament results. 
   /// </summary>
   public class HtmlResults {
-    public List<String> Title { get; private set; }
-    public List<Dictionary<string, object>> Records { get; private set; } 
+    public List<String> Title { get; set; }
+    public List<Record> Records { get; set; } 
 
-    private HtmlResults() {}
-
-    public static Builder newBuilder() {
-      return new Builder();
+    public HtmlResults() {
+      Records = new List<Record>();
     }
 
     private String GetHeader(String type) {
@@ -40,20 +38,12 @@ namespace BMtoKOPS.Output {
       res.Append(header);
       res.Append(HtmlResources.ProtocolsHTMLTableResultHeader);
 
-      foreach (Dictionary<string, object> record in Records) {
-        res.AppendFormat(KopsHelper.GetLocalInfo(), HtmlResources.ProtocolsHTMLTableResultBody,
-          record["place"],
-          record["number"],
-          record["names"],
-          record["rank"],
-          record["region"],
-          record["correction"],
-          record["result"]);
+      foreach (Record record in Records) {
+        res.Append(record.print());
 
         // Start new page after 35 result.
         // TODO: Calculate number of result per page (from 25 to 35)
-        int place = (int) record["place"];
-        if (place % 36 == 0) {
+        if (record.Place % 36 == 0) {
           res.Append(HtmlResources.ProtocolsHTMLTableResultFooter);
           res.Append(header);
           res.Append(HtmlResources.ProtocolsHTMLTableResultHeader);
@@ -63,28 +53,20 @@ namespace BMtoKOPS.Output {
       return res.ToString();
     }
 
-    public class Builder {
-      private HtmlResults result = new HtmlResults();
+    public class Record {
+      public int Place { get; set; }
+      public int Number { get; set; }
+      public string Names { get; set; }
+      public double Rank { get; set; }
+      public string Region { get; set; }
+      public string Correction { get; set; }
+      public string Result { get; set; }
 
-      public Builder() {
-        result.Records = new List<Dictionary<string, object>>();
-      }
+      public Record() {}
 
-      public HtmlResults build() {
-        var res = result;
-        result = null;
-
-        return res;
-      }
-
-      public Builder Title(List<string> title) {
-        result.Title = title;
-        return this;
-      }
-
-      public Builder AddRecord(Dictionary<string, object> record) {
-        result.Records.Add(record);
-        return this;
+      public String print() {
+        return String.Format(KopsHelper.GetLocalInfo(), HtmlResources.ProtocolsHTMLTableResultBody,
+            Place, Number, Names, Rank, Region, Correction, Result);
       }
     }
   }
