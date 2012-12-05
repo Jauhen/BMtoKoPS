@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 
 namespace BMtoKOPS.Output {
-  public class HtmlOutput {
-    public static void A() {
-    }
+  public interface IHtml  {
+    String print();
   }
 }

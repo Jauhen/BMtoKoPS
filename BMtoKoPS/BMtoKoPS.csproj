@@ -82,7 +82,7 @@
   <ItemGroup>
     <Compile Include="KOPS\IReader.cs" />
     <Compile Include="KOPS\KopsReader.cs" />
-    <Compile Include="Output\HtmlOutput.cs" />
+    <Compile Include="Output\IHtml.cs" />
     <Compile Include="Output\HtmlProtocols.cs" />
     <Compile Include="Output\HtmlResources.Designer.cs">
       <AutoGen>True</AutoGen>

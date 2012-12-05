@@ -172,29 +172,28 @@ namespace BMtoKOPS.KOPS {
 
     }
 
-    public String GetHtml(int isNS) {
-      String res;
-
+    public IHtml GetHtml(int isNS) {
       if (result != 30000) {
         if (!CorrectContract(k)) {
-          res = String.Format("<td colspan=\"4\"></td><td {1}>{0}</td>",
-              tdResult.Equals(String.Empty) ? result.ToString() : tdResult,
-              result < 0 ? "class=\"right\"" : (!tdResult.Equals(String.Empty) ? "align=\"center\"" : ""));
+          HtmlProtocols.TDDeal deal = new HtmlProtocols.TDDeal();
+          deal.Result = tdResult.Equals(String.Empty) ? result.ToString() : tdResult;
+          deal.Style = result < 0 ? "class=\"right\"" : (!tdResult.Equals(String.Empty) ? "align=\"center\"" : "");
+          return deal;
         } else if (k.Equals("0C")) {
-          res = String.Format("<td colspan=\"4\">{0}</td><td {5}>{4}</td>",
-              "PASS", "", "", "", "0", "align=\"center\"");
+          return new HtmlProtocols.PassedDeal();
         } else {
-          res = String.Format("<td>{0}</td><td>{1}</td><td>{2}</td><td class=\"right\">{3}</td><td {5}>{4}</td>",
-              ReplaceSuit(k), d, ReplaceSuit(l),
-              t == 0 ? "=" : (t > 0 ? String.Format("+{0}", t) : t.ToString()),
-              result * isNS, result < 0 ? "class=\"right\"" : "");
+          HtmlProtocols.PlayedDeal deal = new HtmlProtocols.PlayedDeal();
+          deal.Contract = ReplaceSuit(k);
+          deal.Dealer = d;
+          deal.Lead = ReplaceSuit(l);
+          deal.Tricks = t == 0 ? "=" : (t > 0 ? String.Format("+{0}", t) : t.ToString());
+          deal.Score = result * isNS;
+          deal.IsPositive = result >= 0;
+          return deal;
         }
       } else {
-        res = "<td colspan=\"5\">Not Played</td>";
+        return new HtmlProtocols.NotPlayedDeal();
       }
-
-
-      return res;
     }
 
     private bool CorrectContract(String k) {

@@ -146,7 +146,7 @@ namespace BMtoKOPS {
 
           res.AppendFormat(KopsHelper.GetLocalInfo(), @"<td class=""right"">{0}</td><td>{1}</td>{2}<td class=""right"">{3}</td></tr>",
               boards[i].GetBoardNumber(),
-              line, deal.GetHtml(line.Equals("NS") ? 1 : -1),
+              line, deal.GetHtml(line.Equals("NS") ? 1 : -1).print(),
               result.HasValue ? scoringMethod.PrintResult(result.Value, 2.0 * maxNumberOfRecords - 2.0) :
               "");
         }
@@ -168,31 +168,33 @@ namespace BMtoKOPS {
       for (int i = 0; i < movement.Deals(round); i++) {
         String ns = "";
         String ew = "";
-        if (boards[n].GetDeal(i).GetNSResult().HasValue) {
-          ns = scoringMethod.PrintResult(boards[n].GetDeal(i).GetNSResult().Value, 2.0 * maxNumberOfRecords - 2.0);
+        KopsDeal deal = boards[n].GetDeal(i);
+
+        if (deal.GetNSResult().HasValue) {
+          ns = scoringMethod.PrintResult(deal.GetNSResult().Value, 2.0 * maxNumberOfRecords - 2.0);
         } else {
-          if (boards[n].GetDeal(i).tdResult.IndexOf('/') > -1) {
-            ns = boards[n].GetDeal(i).tdResult.Split('/')[0] + ".0%";
+          if (deal.tdResult.IndexOf('/') > -1) {
+            ns = deal.tdResult.Split('/')[0] + ".0%";
           }
         }
 
-        if (boards[n].GetDeal(i).GetEWResult().HasValue) {
-          ew = scoringMethod.PrintResult(boards[n].GetDeal(i).GetEWResult().Value, 2.0 * maxNumberOfRecords - 2.0);
+        if (deal.GetEWResult().HasValue) {
+          ew = scoringMethod.PrintResult(deal.GetEWResult().Value, 2.0 * maxNumberOfRecords - 2.0);
         } else {
-          if (boards[n].GetDeal(i).tdResult.IndexOf('/') > -1) {
-            ew = boards[n].GetDeal(i).tdResult.Split('/')[1] + ".0%";
+          if (deal.tdResult.IndexOf('/') > -1) {
+            ew = deal.tdResult.Split('/')[1] + ".0%";
           }
         }
 
-        HtmlProtocols.Deal deal = new HtmlProtocols.Deal();
+        HtmlProtocols.Deal printedDeal = new HtmlProtocols.Deal();
 
-        deal.NsNumber = Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetNS(round, i) : movement.GetEW(round, i)).ToString();
-        deal.EwNumber = Pairs.GetPairNumber(boards[n].GetDeal(i).line ? movement.GetEW(round, i) : movement.GetNS(round, i)).ToString();
-        deal.Play = boards[n].GetDeal(i).GetHtml(1);
-        deal.NsResult = ns;
-        deal.EwResult = ew;
+        printedDeal.NsNumber = Pairs.GetPairNumber(deal.line ? movement.GetNS(round, i) : movement.GetEW(round, i)).ToString();
+        printedDeal.EwNumber = Pairs.GetPairNumber(deal.line ? movement.GetEW(round, i) : movement.GetNS(round, i)).ToString();
+        printedDeal.Play = deal.GetHtml(1);
+        printedDeal.NsResult = ns;
+        printedDeal.EwResult = ew;
 
-        board.Deals.Add(deal);
+        board.Deals.Add(printedDeal);
       }
 
       return board;
@@ -230,7 +232,9 @@ namespace BMtoKOPS {
         htmlProtocol.Boards.Add(GetBoardResults(i));
       }
 
-      return htmlProtocol.print(dealsPerRound);
+      htmlProtocol.dealsPerRound = dealsPerRound;
+
+      return htmlProtocol.print();
     }
 
     protected String GetTitle() {

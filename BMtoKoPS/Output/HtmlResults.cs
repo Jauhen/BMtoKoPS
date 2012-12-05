@@ -8,7 +8,7 @@ namespace BMtoKOPS.Output {
   /// <summary>
   /// Print tournament results. 
   /// </summary>
-  public class HtmlResults {
+  public class HtmlResults : IHtml {
     public List<String> Title { get; set; }
     public List<Record> Records { get; set; } 
 
@@ -53,7 +53,7 @@ namespace BMtoKOPS.Output {
       return res.ToString();
     }
 
-    public class Record {
+    public class Record : IHtml {
       public int Place { get; set; }
       public int Number { get; set; }
       public string Names { get; set; }
