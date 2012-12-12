@@ -161,7 +161,7 @@ namespace BMtoKOPS {
       int round = n / dealsPerRound;
 
       board.Number = boards[n].GetBoardNumber();
-      board.Header = boards[n].PrintHeader();
+      board.setHeader(boards[n]);
 
       StringBuilder res = new StringBuilder();
 

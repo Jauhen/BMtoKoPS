@@ -168,8 +168,6 @@ namespace BMtoKOPS.KOPS {
           result--;
         }
       }
-
-
     }
 
     public IHtml GetHtml(int isNS) {
@@ -183,10 +181,10 @@ namespace BMtoKOPS.KOPS {
           return new HtmlProtocols.PassedDeal();
         } else {
           HtmlProtocols.PlayedDeal deal = new HtmlProtocols.PlayedDeal();
-          deal.Contract = ReplaceSuit(k);
+          deal.Contract = k;
           deal.Dealer = d;
-          deal.Lead = ReplaceSuit(l);
-          deal.Tricks = t == 0 ? "=" : (t > 0 ? String.Format("+{0}", t) : t.ToString());
+          deal.Lead = l;
+          deal.Tricks = t;
           deal.Score = result * isNS;
           deal.IsPositive = result >= 0;
           return deal;
@@ -200,62 +198,6 @@ namespace BMtoKOPS.KOPS {
       String r = k;
       r = r.Replace('C', ' ').Replace('D', ' ').Replace('H', ' ').Replace('S', ' ').Replace('N', ' ').Replace('x', ' ');
       return int.Parse(r.Trim()) < 8;
-    }
-
-    public static String ReplaceSuit(String s) {
-      if (s == null)
-        return "";
-
-      if (s.IndexOf('C') > -1) {
-        return s.Replace("C", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.c));
-      }
-      if (s.IndexOf('D') > -1) {
-        return s.Replace("D", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.d));
-      }
-      if (s.IndexOf('H') > -1) {
-        return s.Replace("H", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.h));
-      }
-      if (s.IndexOf('S') > -1) {
-        return s.Replace("S", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.s));
-      }
-      if (s.IndexOf('N') > -1) {
-        return s.Replace("N", String.Format("<img src=\"{0}\" width=\"13\" height=\"11\">", HtmlResources.n));
-      }
-      switch (s) {
-        case "G1":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d1);
-        case "G2":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d2);
-        case "G3":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d3);
-        case "G4":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d4);
-        case "G5":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d5);
-        case "G6":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d6);
-        case "G7":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d7);
-        case "G8":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d8);
-        case "G9":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d9);
-        case "G10":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d10);
-        case "G11":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d11);
-        case "G12":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d12);
-        case "G13":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d13);
-        case "G14":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d14);
-        case "G15":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d15);
-        case "G16":
-          return String.Format("<img src=\"{0}\" width=\"63\" height=\"63\">", HtmlResources.d16);
-      }
-      return s;
     }
 
     public String GetText {
